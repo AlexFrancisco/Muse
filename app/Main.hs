@@ -6,10 +6,12 @@ import Euterpea
 
 import Control.DeepSeq
 
-x1 = c 4 en :+: g 4 en :+: c 5 en :+: g 5 en
+x1 = a 4 sn :+: rest sn :+: a 4 sn :+: c 5 qn :+: e 5 en :+: rest en :+: g 3 sn :+: rest sn :+: gs 3 sn :+: g 3 qn :+: rest sn  
 x2 = x1 :+: transpose 3 x1
 x3 = x2 :+: x2 :+: invert x2 :+: retro x2
 x4 = forever x3 :=: forever (tempo (2/3) x3)
+
+x5 = forever x1
 
 x4' = forever x3 :=: (rest hn :+: forever (tempo (2/3) x3))
 
@@ -22,4 +24,4 @@ playX = playC defParams{perfAlg = eventMerge . perform} where
              else e1 : eventMerge (e2:es)
      eventMerge e = e
 main :: IO ()
-main = playX x4'
+main = playX x5
